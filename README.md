@@ -3,7 +3,7 @@
 ## How to install?
 
 ```
-npm i romanian-personal-identity-code-validator
+npm i --save romanian-personal-identity-code-validator
 ```
 
 ## How to use it?
