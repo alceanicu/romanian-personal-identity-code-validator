@@ -78,7 +78,7 @@ const countyCode: { [key: string]: string } = {
  * How to install it?
  *
  * ```
- *
+ * npm i romanian-personal-identity-code-validator
  * ```
  *
  * How to use it?
