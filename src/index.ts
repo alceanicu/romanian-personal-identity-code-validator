@@ -1,6 +1,6 @@
-import * as moment from 'moment/moment';
+import * as moment from 'moment/moment'
 
-const controlKey: number[] = [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9];
+const controlKey: number[] = [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9]
 const countyCode: { [key: string]: string } = {
   '01': 'Alba',
   '02': 'Arad',
@@ -50,7 +50,7 @@ const countyCode: { [key: string]: string } = {
   '46': 'București S.6',
   '51': 'Calarași',
   '52': 'Giurgiu',
-};
+}
 
 /**
  * Class CNP - Validation for Romanian Social Security Number (CNP)
@@ -101,167 +101,170 @@ const countyCode: { [key: string]: string } = {
  * ```
  */
 export class CNP {
-  private _cnpArray: number[] = [];
-  private _isValid = false;
-  private _year: number = 0;
-  private _month: string = '';
-  private _day: string = '';
-  private _cc: string = '';
+  private _cnpArray: number[] = []
+  private _isValid = false
+  private _year: number = 0
+  private _month: string = ''
+  private _day: string = ''
+  private _cc: string = ''
 
   constructor(cnp: string = '') {
-    this.init(cnp);
+    this.init(cnp)
   }
 
   get cnp(): string {
     if (!this._isValid) {
-      return 'Invalid CNP';
+      return 'Invalid CNP'
     }
 
-    return this._cnpArray.join('');
+    return this._cnpArray.join('')
   }
 
   set cnp(cnp: string) {
-    this.init(cnp);
+    this.init(cnp)
   }
 
   public isValid(): boolean {
-    return this._isValid;
+    return this._isValid
   }
 
   public getBirthDate(format: string = 'YYYY-MM-DD'): string {
-    return moment(this.dateInput()).format(format);
+    return moment(this.dateInput()).format(format)
   }
 
   public getBirthPlace(): string | null {
     if (!this._isValid) {
-      return null;
+      return null
     }
-    return countyCode[this._cc];
+    return countyCode[this._cc]
   }
 
   public getGender(m: string = 'male', f: string = 'female'): string {
-    let gender = '';
+    let gender = ''
     if (this._isValid) {
       if ([1, 3, 5, 7].indexOf(this._cnpArray[0]) !== -1) {
-        gender = m;
+        gender = m
       }
 
       if ([2, 4, 6, 8].indexOf(this._cnpArray[0]) !== -1) {
-        gender = f;
+        gender = f
       }
     }
 
-    return gender;
+    return gender
   }
 
   public hasIdentityCard(): boolean {
     if (!this._isValid) {
-      return false;
+      return false
     }
 
-    const birthDate = moment(this.dateInput(), 'YYYY-MM-DD');
+    const birthDate = moment(this.dateInput(), 'YYYY-MM-DD')
 
-    return Math.floor(moment(new Date()).diff(birthDate, 'years', true)) > 14;
+    return Math.floor(moment(new Date()).diff(birthDate, 'years', true)) > 14
   }
 
   public getSerialNumberFromCNP(): string {
-    return this._isValid ? `${this._cnpArray[9]}${this._cnpArray[10]}${this._cnpArray[11]}` : '';
+    return this._isValid ? `${this._cnpArray[9]}${this._cnpArray[10]}${this._cnpArray[11]}` : ''
   }
 
   private init(cnp: string): void {
-    this._cnpArray = cnp.split('').map((x: string) => {
-      return parseInt(x, 10);
-    }).filter((x: number) => !Number.isNaN(x));
+    this._cnpArray = cnp
+      .split('')
+      .map((x: string) => {
+        return parseInt(x, 10)
+      })
+      .filter((x: number) => !Number.isNaN(x))
 
-    this._isValid = this.validateCnp();
+    this._isValid = this.validateCnp()
   }
 
   private validateCnp(): boolean {
     if (this._cnpArray.length !== 13) {
-      return false;
+      return false
     }
 
-    this.setYear();
-    this.setMonth();
-    this.setDay();
-    this.setCounty();
+    this.setYear()
+    this.setMonth()
+    this.setDay()
+    this.setCounty()
 
-    return this.checkDate() && this.checkCounty() && this.checkHash();
+    return this.checkDate() && this.checkCounty() && this.checkHash()
   }
 
   private checkDate(): boolean {
-    const format = 'YYYY-MM-DD';
-    const date = moment(this.dateInput(), format, true);
-    const min = moment('1800-01-01', format);
-    const max = moment('2099-12-31', format);
-    return date.isValid() && date.isBetween(min, max);
+    const format = 'YYYY-MM-DD'
+    const date = moment(this.dateInput(), format, true)
+    const min = moment('1800-01-01', format)
+    const max = moment('2099-12-31', format)
+    return date.isValid() && date.isBetween(min, max)
   }
 
   private checkCounty(): boolean {
-    return countyCode.hasOwnProperty(this._cc);
+    return countyCode.hasOwnProperty(this._cc)
   }
 
   private checkHash(): boolean {
-    let hashSum = 0;
+    let hashSum = 0
 
     for (let i = 0; i < 12; i++) {
-      hashSum += this._cnpArray[i] * controlKey[i];
+      hashSum += this._cnpArray[i] * controlKey[i]
     }
 
-    hashSum = hashSum % 11;
+    hashSum = hashSum % 11
     if (hashSum === 10) {
-      hashSum = 1;
+      hashSum = 1
     }
 
-    return hashSum === this._cnpArray[12];
+    return hashSum === this._cnpArray[12]
   }
 
   private setYear(): void {
-    this._year = 0;
-    const year = (this._cnpArray[1] * 10) + this._cnpArray[2];
+    this._year = 0
+    const year = this._cnpArray[1] * 10 + this._cnpArray[2]
 
     switch (this._cnpArray[0]) {
       // romanian citizen born between 1900.01.01 and 1999.12.31
-      case 1 :
-      case 2 :
-        this._year = year + 1900;
-        break;
+      case 1:
+      case 2:
+        this._year = year + 1900
+        break
       // romanian citizen born between 1800.01.01 and 1899.12.31
-      case 3 :
-      case 4 :
-        this._year = year + 1800;
-        break;
+      case 3:
+      case 4:
+        this._year = year + 1800
+        break
       // romanian citizen born between 2000.01.01 and 2099.12.31
-      case 5 :
-      case 6 :
-        this._year = year + 2000;
-        break;
+      case 5:
+      case 6:
+        this._year = year + 2000
+        break
       // residents (7&8) && people with foreign citizenship (9)
-      case 7 :
-      case 8 :
-      case 9 :
-        this._year = year + 2000;
+      case 7:
+      case 8:
+      case 9:
+        this._year = year + 2000
         if (year > +moment().format('YY')) {
-          this._year -= 100;
+          this._year -= 100
         }
 
-        break;
+        break
     }
   }
 
   private setMonth(): void {
-    this._month = `${this._cnpArray[3]}${this._cnpArray[4]}`;
+    this._month = `${this._cnpArray[3]}${this._cnpArray[4]}`
   }
 
   private setDay(): void {
-    this._day = `${this._cnpArray[5]}${this._cnpArray[6]}`;
+    this._day = `${this._cnpArray[5]}${this._cnpArray[6]}`
   }
 
   private setCounty(): void {
-    this._cc = `${this._cnpArray[7]}${this._cnpArray[8]}`;
+    this._cc = `${this._cnpArray[7]}${this._cnpArray[8]}`
   }
 
   private dateInput(): string {
-    return `${this._year}-${this._month}-${this._day}`;
+    return `${this._year}-${this._month}-${this._day}`
   }
 }
