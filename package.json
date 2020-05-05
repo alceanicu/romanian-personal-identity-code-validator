@@ -27,7 +27,7 @@
   "author": "Nicu Alcea <nicu.alcea@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "moment": "^2.25.1"
+    "moment": "^2.25.3"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",
