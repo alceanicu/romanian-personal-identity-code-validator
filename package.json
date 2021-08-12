@@ -1,6 +1,6 @@
 {
   "name": "romanian-personal-identity-code-validator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "title": "Romanian personal identity code validator - CNP validator",
   "description": "Validates romanian personal identity codes (CNP). Validator cod numeric personal (CNP). Validation for Romanian Social Security Number. Romanian Personal Numeric Code validation",
   "main": "lib/index.js",
@@ -31,7 +31,7 @@
   "author": "Nicu Alcea <nicu.alcea@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "moment": "^2.25.3"
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@types/jest": "^25.2.1",

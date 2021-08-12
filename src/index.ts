@@ -129,6 +129,10 @@ export class CNP {
   }
 
   public getBirthDate(format: string = 'YYYY-MM-DD'): string {
+    if (!this._isValid) {
+      return "Invalid date"
+    }
+
     return moment(this.dateInput()).format(format)
   }
 
@@ -169,14 +173,18 @@ export class CNP {
   }
 
   private init(cnp: string): void {
-    this._cnpArray = cnp
-      .split('')
-      .map((x: string) => {
-        return parseInt(x, 10)
-      })
-      .filter((x: number) => !Number.isNaN(x))
+    if (cnp.length !== 13) {
+      this._isValid = false
+    } else {
+      this._cnpArray = cnp
+        .split('')
+        .map((x: string) => {
+          return parseInt(x, 10)
+        })
+        .filter((x: number) => !Number.isNaN(x))
 
-    this._isValid = this.validateCnp()
+      this._isValid = this.validateCnp()
+    }
   }
 
   private validateCnp(): boolean {

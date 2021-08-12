@@ -27,6 +27,11 @@ if (cnp.isValid()) {
 }
 ```
 
+## How to run tests
+```js
+npm test
+```
+
 ## License
 
 This package is licensed under the [MIT](http://opensource.org/licenses/MIT) license.
