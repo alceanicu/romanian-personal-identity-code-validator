@@ -1,12 +1,14 @@
-# CNP - romanian personal identity code validator (validator cod numeric personal)
+# CNP - romanian personal identification number validator
 
-## How to install?
+## (CNP - validator cod numeric personal)
+
+### How to install?
 
 ```
 npm i --save romanian-personal-identity-code-validator
 ```
 
-## How to use it?
+### How to use it?
 
 ```js
 import { CNP } from 'romanian-personal-identity-code-validator';
@@ -27,11 +29,11 @@ if (cnp.isValid()) {
 }
 ```
 
-## How to run tests
+### How to run tests
 ```js
 npm test
 ```
 
-## License
+### License
 
 This package is licensed under the [MIT](http://opensource.org/licenses/MIT) license.
