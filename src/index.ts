@@ -50,8 +50,8 @@ const countyCode: { [key: string]: string } = {
   '46': 'București - Sector 6',
   '51': 'Calarași',
   '52': 'Giurgiu',
-  '47':	'București - Sector 7(desfiintat)',
-  '48':	'București - Sector 8(desfiintat)',
+  '47': 'București - Sector 7(desfiintat)',
+  '48': 'București - Sector 8(desfiintat)',
 }
 
 /**
@@ -135,7 +135,7 @@ export class CNP {
 
   public getBirthDate(format: string = 'YYYY-MM-DD'): string {
     if (!this._isValid) {
-      return "Invalid date"
+      return 'Invalid date'
     }
 
     return moment(this.dateInput()).format(format)
