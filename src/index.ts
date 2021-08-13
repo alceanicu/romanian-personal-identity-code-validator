@@ -42,14 +42,16 @@ const countyCode: { [key: string]: string } = {
   '38': 'Vâlcea',
   '39': 'Vrancea',
   '40': 'București',
-  '41': 'București S.1',
-  '42': 'București S.2',
-  '43': 'București S.3',
-  '44': 'București S.4',
-  '45': 'București S.5',
-  '46': 'București S.6',
+  '41': 'București - Sector 1',
+  '42': 'București - Sector 2',
+  '43': 'București - Sector 3',
+  '44': 'București - Sector 4',
+  '45': 'București - Sector 5',
+  '46': 'București - Sector 6',
   '51': 'Calarași',
   '52': 'Giurgiu',
+  '47':	'București - Sector 7(desfiintat)',
+  '48':	'București - Sector 8(desfiintat)',
 }
 
 /**
@@ -98,7 +100,10 @@ const countyCode: { [key: string]: string } = {
  *   console.log(cnp.hasIdentityCard());        // if the age is grater than 14 years
  *   console.log(cnp.getSerialNumberFromCNP());
  * }
+ *
  * ```
+ * @classdesc - Atention class validate if CNP format if valid! Class can return true evan that CNP do not exist!
+ * eg: 6990504015905 is valid but this CNP do not exist in reality (date of birth for this CNP is 2099-05-04)!
  */
 export class CNP {
   private _cnpArray: number[] = []
@@ -188,10 +193,6 @@ export class CNP {
   }
 
   private validateCnp(): boolean {
-    if (this._cnpArray.length !== 13) {
-      return false
-    }
-
     this.setYear()
     this.setMonth()
     this.setDay()

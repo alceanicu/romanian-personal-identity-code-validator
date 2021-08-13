@@ -1,6 +1,6 @@
 {
   "name": "romanian-personal-identity-code-validator",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "title": "Romanian personal identity code validator - CNP validator",
   "description": "Validates romanian personal identity codes (CNP). Validator cod numeric personal (CNP). Validation for Romanian Social Security Number. Romanian Personal Numeric Code validation",
   "main": "lib/index.js",
@@ -34,14 +34,16 @@
     "moment": "^2.29.1"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.1",
-    "codecov": "^3.7.1",
-    "jest": "^25.5.4",
-    "prettier": "^2.0.5",
-    "ts-jest": "^25.4.0",
-    "tslint": "^6.1.2",
+    "@types/jest": "^27.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.1",
+    "@typescript-eslint/parser": "^4.29.1",
+    "codecov": "^3.8.3",
+    "eslint": "^7.32.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "ts-jest": "^27.0.4",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.8.3"
+    "typescript": "^4.3.5"
   },
   "files": [
     "lib/**/*"

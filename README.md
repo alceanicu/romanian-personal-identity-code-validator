@@ -13,7 +13,7 @@ import { CNP } from 'romanian-personal-identity-code-validator';
 
 let cnp = new CNP('123'); 
 // or use a setter
-cnp.cnp = '1234';
+cnp.cnp = '5110102441483';
 
 if (cnp.isValid()) {
   // extract information from an valid CNP
