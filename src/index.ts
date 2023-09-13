@@ -52,6 +52,7 @@ const countyCode: { [key: string]: string } = {
   '52': 'Giurgiu',
   '47': 'București - Sector 7(desfiintat)',
   '48': 'București - Sector 8(desfiintat)',
+  '80': 'CNP obtinut in strainate',
 }
 
 /**
