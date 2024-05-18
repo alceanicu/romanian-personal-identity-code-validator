@@ -24,6 +24,7 @@ if (cnp.isValid()) {
   console.log(cnp.getBirthPlace());
   console.log(cnp.getGender());              // default male | female
   console.log(cnp.getGender('M', 'F'));      // or set a custom value M | F
+  console.log(cnp.getAgeInYears());
   console.log(cnp.hasIdentityCard());        // if the age is grater than 14 years
   console.log(cnp.getSerialNumberFromCNP());
 }

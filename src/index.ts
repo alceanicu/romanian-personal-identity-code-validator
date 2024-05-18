@@ -98,6 +98,7 @@ const countyCode: { [key: string]: string } = {
  *   console.log(cnp.getBirthPlace());
  *   console.log(cnp.getGender());              // default male | female
  *   console.log(cnp.getGender('M', 'F'));      // or set a custom value M | F
+ *   console.log(cnp.getAgeInYears())
  *   console.log(cnp.hasIdentityCard());        // if the age is grater than 14 years
  *   console.log(cnp.getSerialNumberFromCNP());
  * }
@@ -164,14 +165,24 @@ export class CNP {
     return gender
   }
 
-  public hasIdentityCard(): boolean {
+  public getAgeInYears(): number | null {
     if (!this._isValid) {
-      return false
+      return null
     }
 
     const birthDate = moment(this.dateInput(), 'YYYY-MM-DD')
 
-    return Math.floor(moment(new Date()).diff(birthDate, 'years', true)) > 14
+    return Math.floor(moment(Date.now()).diff(this.getBirthDate(), 'years', true));
+  }
+
+  public hasIdentityCard(): boolean {
+    const ageInYears = this.getAgeInYears()
+
+    if (ageInYears === null) {
+      return false;
+    }
+
+    return ageInYears >= 14
   }
 
   public getSerialNumberFromCNP(): string {
